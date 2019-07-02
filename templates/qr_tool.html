@@ -3,11 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>在线二维码生成器</title>
+        <title>在线二维码生成器 - IT魔君</title>
+
+        <script>
+            function gen_qrcode() {
+                //获取文本框中用户输入的数据
+                var data = document.getElementsByName("data")[0].value;
+                //获取显示二维码图片的img对象
+                var qr_img = document.getElementById("qr_img");
+                //给img对象的src属性赋值
+                qr_img.src = "/qr?data=" + data;
+            }
+
+            function enter_key_handle() {
+                if(event.keyCode == 13) {
+                    gen_qrcode();
+                }
+            }
+        </script>
     </head>
-    <body>
-        <form action="/qr" method="POST">
-            <label>内容：</label><input name="data" type="text"><button type="submit" style="margin-left: 3px;">生成</button>
-        </form>
+    <body onkeydown="enter_key_handle()">
+        <label>内容：</label><input name="data" type="text"><button type="button" style="margin-left: 3px;" onclick="gen_qrcode()">生成</button><br />
+        <img id="qr_img" src="" />
     </body>
 </html>
